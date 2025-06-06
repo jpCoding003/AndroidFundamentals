@@ -1,7 +1,7 @@
 package com.tops.androidfundamentals.Fragment
 
 import android.content.Intent
-import android.os.Bundle
+import android.os.Bundle 
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +12,6 @@ import androidx.fragment.app.replace
 import com.tops.androidfundamentals.DashboardDrawerActivity
 import com.tops.androidfundamentals.R
 import com.tops.androidfundamentals.databinding.FragmentLoginBinding
-
 
 class LoginFragment : Fragment() {
 
@@ -33,6 +32,7 @@ class LoginFragment : Fragment() {
 
         var username = binding.etUsername.text.toString()
         var password = binding.etPassword.text.toString()
+
         binding.btnlogin.setOnClickListener {
             if (username == "jay" && password == "jay123") {
                 var intent = Intent(context, DashboardDrawerActivity::class.java)
@@ -52,5 +52,6 @@ class LoginFragment : Fragment() {
                 replace<SignupFragment>(R.id.fragmentcontainerview)
             }
         }
+
     }
 }
