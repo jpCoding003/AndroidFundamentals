@@ -33,7 +33,7 @@ class SignupFragment : Fragment() {
         binding.btnlogin.setOnClickListener {
             activity?.supportFragmentManager?.commit {
                 setReorderingAllowed(true)
-                replace<LoginFragment>(R.id.fragmentcontainerview)
+                replace<LoginFragment>(R.id.fragment_container_view)
             }
         }
 
@@ -43,7 +43,7 @@ class SignupFragment : Fragment() {
 
             activity?.supportFragmentManager?.commit {
                 setReorderingAllowed(true)
-                replace<LoginFragment>(R.id.fragmentcontainerview)
+                replace<LoginFragment>(R.id.fragment_container_view)
             }
             }else {
                 Toast.makeText( context,    "Enter valid Details", Toast.LENGTH_SHORT).show()

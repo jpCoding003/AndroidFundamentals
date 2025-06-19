@@ -1,35 +1,20 @@
 package com.tops.androidfundamentals
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
-import com.tops.androidfundamentals.Fragment.LoginFragment
-import com.tops.androidfundamentals.databinding.ActivitySplashScreenBinding
 
-class SplashScreen : AppCompatActivity() {
-
-    private lateinit var binding: ActivitySplashScreenBinding
+class DataOfRetrofitApi : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_splash_screen)
+        setContentView(R.layout.activity_data_of_retrofit_api)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        Handler().postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        },3000)
     }
 }

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.tops.androidfundamentals.DashboardDrawerActivity
+import com.tops.androidfundamentals.DataOfRetrofitApi
 import com.tops.androidfundamentals.R
 import com.tops.androidfundamentals.databinding.FragmentLoginBinding
 
@@ -21,7 +21,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        binding = FragmentLoginBinding.inflate(layoutInflater)
         return binding.root
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_login, container, false)
@@ -34,12 +34,12 @@ class LoginFragment : Fragment() {
         var password = binding.etPassword.text.toString()
 
         binding.btnlogin.setOnClickListener {
-            if (username == "jay" && password == "jay123") {
-                var intent = Intent(context, DashboardDrawerActivity::class.java)
+            if (username == "jay" && password == "123") {
+                var intent = Intent(context, DataOfRetrofitApi::class.java)
                 startActivity(intent)
             }
             else if(binding.etPassword!= null && binding.etUsername!= null) {
-                var intent = Intent(context, DashboardDrawerActivity::class.java)
+                var intent = Intent(context, DataOfRetrofitApi::class.java)
                 startActivity(intent)
             }else {
                 Toast.makeText( context, "Enter valid Details", Toast.LENGTH_SHORT).show()
@@ -49,9 +49,8 @@ class LoginFragment : Fragment() {
         binding.btnsignup.setOnClickListener{
             activity?.supportFragmentManager?.commit {
                 setReorderingAllowed(true)
-                replace<SignupFragment>(R.id.fragmentcontainerview)
+                replace<SignupFragment>(R.id.fragment_container_view)
             }
         }
-
     }
 }

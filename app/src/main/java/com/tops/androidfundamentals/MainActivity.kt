@@ -1,21 +1,22 @@
 package com.tops.androidfundamentals
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
-import com.tops.androidfundamentals.Fragment.LoginFragment
-import com.tops.androidfundamentals.databinding.ActivityMainBinding
+import com.tops.androidfundamentals.model.ProductRoot
+import com.tops.androidfundamentals.service.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
+private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -24,10 +25,24 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        supportFragmentManager.commit{
-            setReorderingAllowed(true)
-           add<LoginFragment>(R.id.fragmentcontainerview)
-        }
+        val call: Call<ProductRoot> = RetrofitClient.getInstance().listproduct()
 
+        call.enqueue(object: Callback<ProductRoot>{
+            override fun onResponse(call: Call<ProductRoot?>,response: Response<ProductRoot?>
+            ) {
+               if (response.isSuccessful){
+                   val data = response.body()
+                   Log.i(TAG, "DATA == ${data.toString()}")
+               }
+            }
+
+            override fun onFailure(
+                call: Call<ProductRoot?>,
+                t: Throwable
+            ) {
+                Log.i(TAG, t.message.toString())
+            }
+
+        })
     }
 }
