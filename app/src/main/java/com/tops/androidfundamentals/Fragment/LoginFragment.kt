@@ -49,7 +49,7 @@ class LoginFragment : Fragment() {
         binding.btnsignup.setOnClickListener{
             activity?.supportFragmentManager?.commit {
                 setReorderingAllowed(true)
-                replace<SignupFragment>(R.id.fragment_container_view)
+               // replace<SignupFragment>(R.id.fragment_container_view)
             }
         }
     }

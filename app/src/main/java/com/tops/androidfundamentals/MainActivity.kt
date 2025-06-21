@@ -1,5 +1,6 @@
 package com.tops.androidfundamentals
 
+import android.R.attr.data
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,14 +12,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.tops.androidfundamentals.Adapter.MyAdapter
 import com.tops.androidfundamentals.databinding.ActivityMainBinding
 import com.tops.androidfundamentals.model.NewProduct
+import com.tops.androidfundamentals.model.Product
 import com.tops.androidfundamentals.model.ProductRoot
 import com.tops.androidfundamentals.service.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.ArrayList
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
@@ -62,7 +67,12 @@ class MainActivity : AppCompatActivity() {
             ) {
                if (response.isSuccessful){
                    val data = response.body()
-                   Log.i(TAG, "DATA == ${data.toString()}")
+                   Log.i(TAG, "Data =$data")
+
+                   if (data!= null){
+                       binding.dataRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
+                       binding.dataRecyclerview.adapter = MyAdapter(data.products)
+                   }
                }
             }
 
@@ -72,7 +82,6 @@ class MainActivity : AppCompatActivity() {
             ) {
                 Log.i(TAG, t.message.toString())
             }
-
         })
     }
 }
