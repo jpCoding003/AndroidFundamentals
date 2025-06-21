@@ -8,15 +8,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EACECE"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        android:elevation="12dp"
+        app:cardBackgroundColor="#E7CDEF"
+        app:cardCornerRadius="20dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/ImageViewData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher_background"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
         <TextView
             android:id="@+id/textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hello"
+            android:paddingStart="15dp"
+            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
-
+            <TextView
+                android:id="@+id/textDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Heloo Desc"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
+        </LinearLayout>
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

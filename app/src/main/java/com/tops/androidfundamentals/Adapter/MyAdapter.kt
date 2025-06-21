@@ -3,6 +3,7 @@ package com.tops.androidfundamentals.Adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.tops.androidfundamentals.databinding.ProductRowItemBinding
 import com.tops.androidfundamentals.model.Product
 
@@ -21,6 +22,9 @@ class MyAdapter(private val products: List<Product>): RecyclerView.Adapter<MyAda
     ) {
         val products = products[position]
         holder.binding.textview.text = products.title
+        holder.binding.textDescription.setText(products.description)
+
+        Picasso.get().load(products.thumbnail).into(holder.binding.ImageViewData)
 
     }
 
