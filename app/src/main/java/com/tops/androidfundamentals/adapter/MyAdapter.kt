@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tops.androidfundamentals.databinding.EmployeeRowItemBinding
 import com.tops.androidfundamentals.model.EmployeeModel
 
-class MyAdapter(private val emplist: List<EmployeeModel>, private val onDeletClick:(Int) -> Unit): RecyclerView.Adapter<MyAdapter.EmpViewHolder>() {
+class MyAdapter(private val emplist: List<EmployeeModel>, private val onDeletClick:(Int) -> Unit, private val onEditClick:(EmployeeModel) -> Unit): RecyclerView.Adapter<MyAdapter.EmpViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -19,15 +19,17 @@ class MyAdapter(private val emplist: List<EmployeeModel>, private val onDeletCli
         holder: EmpViewHolder,
         position: Int
     ) {
-       val emp = emplist[position]
+       var emp = emplist[position]
         holder.binding.tvName.text = emp.name
         holder.binding.tvrole.text = emp.role
         holder.binding.tvempID.text = emp.id.toString()
 
         holder.binding.btnDelete.setOnClickListener {
             onDeletClick(emp.id)
-            notifyItemRemoved(position)
-            notifyDataSetChanged()
+        }
+
+        holder.binding.btnEdit.setOnClickListener {
+            onEditClick(emp)
         }
     }
 

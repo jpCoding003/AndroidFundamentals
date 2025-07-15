@@ -58,4 +58,11 @@ class EmployeVideModel : ViewModel() {
         loadEmployeData(context) // Refresh the list
     }
 
+    fun updateEmployee(context: Context, emp: EmployeeModel) {
+        db = context.openOrCreateDatabase("employe", Context.MODE_PRIVATE, null)
+        db.execSQL("UPDATE employeData SET name = '${emp.name}', role = '${emp.role}' WHERE id = ${emp.id}")
+
+        loadEmployeData(context)
+    }
+
 }

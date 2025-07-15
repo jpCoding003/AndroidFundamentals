@@ -37,9 +37,13 @@ class HomeFragment : Fragment() {
         employeviewmodel.loadEmployeData(requireContext())
         binding.rvEmpData.layoutManager = LinearLayoutManager(requireContext())
         employeviewmodel.employelist.observe(viewLifecycleOwner, Observer{
-                list-> binding.rvEmpData.adapter = MyAdapter(list){
-                empId-> employeviewmodel.deleteEmployee(requireContext(),empId)
-            }
+                list-> binding.rvEmpData.adapter = MyAdapter(list,{ empId-> employeviewmodel.deleteEmployee(requireContext(),empId) },
+            {
+                emp-> val bundle = Bundle().apply {
+                    putParcelable("employe",emp)
+                }
+                findNavController().navigate(R.id.action_homeFragment_to_addNewEmpFragment,bundle)
+            })
         })
 
         binding.btnaddemp.setOnClickListener {
