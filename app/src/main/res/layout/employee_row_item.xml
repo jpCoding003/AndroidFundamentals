@@ -20,33 +20,46 @@
             android:padding="12dp">
 
 
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:id="@+id/ImageViewData"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="12dp">
-        <TextView
-            android:id="@+id/textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello"
-            android:paddingStart="15dp"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-            <TextView
-                android:id="@+id/textDescription"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/tvempID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="1"
+                    android:paddingStart="15dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hello"
+                    android:paddingStart="15dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvrole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
                 android:text="Heloo Desc"
-                android:gravity="center"
                 android:paddingStart="15dp"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
