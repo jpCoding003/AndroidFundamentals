@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.commit
-import androidx.fragment.app.replace
-import com.tops.androidfundamentals.R
 import com.tops.androidfundamentals.databinding.FragmentSignupBinding
 
 
@@ -47,7 +45,6 @@ class SignupFragment : Fragment() {
             }
             }else {
                 Toast.makeText( context,    "Enter valid Details", Toast.LENGTH_SHORT).show()
-            //Toast.makeText(context, message= "Enter Valid And complete details", 2000 )
             }
         }
     }
