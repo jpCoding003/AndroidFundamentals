@@ -60,8 +60,12 @@ class EmployeVideModel : ViewModel() {
 
     fun updateEmployee(context: Context, emp: EmployeeModel) {
         db = context.openOrCreateDatabase("employe", Context.MODE_PRIVATE, null)
-        db.execSQL("UPDATE employeData SET name = '${emp.name}', role = '${emp.role}' WHERE id = ${emp.id}")
 
+        val values = ContentValues().apply {
+            put("name",emp.name)
+            put("role",emp.role)
+        }
+        db.update("employeData", values, "id = ?", arrayOf(emp.id.toString()))
         loadEmployeData(context)
     }
 

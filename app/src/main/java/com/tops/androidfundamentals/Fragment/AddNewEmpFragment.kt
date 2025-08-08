@@ -35,9 +35,9 @@ class AddNewEmpFragment : Fragment() {
 
 //        val emp = arguments?.getParcelable<EmployeeModel>("emp")        // Decrepted way ANDRIOD version less than TIRAMISU
 
-        val employee = if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.TIRAMISU){
+        val employee = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             arguments?.getParcelable("employe", EmployeeModel::class.java)
-        }else{
+        } else {
             @Suppress("DEPRECATION")
             arguments?.getParcelable("employe")
         }
@@ -46,24 +46,22 @@ class AddNewEmpFragment : Fragment() {
         binding.etnamae.setText(employee?.name)
         binding.etrole.setText(employee?.role)
 
-        binding.btnSubmit.text = if (empId!= null) "Update" else "Submit"
+        binding.btnSubmit.text = if (empId != null) "Update" else "Submit"
 
         binding.btnSubmit.setOnClickListener {
             val name = binding.etnamae.text.toString()
             val role = binding.etrole.text.toString()
 
-            if (empId != null){
-                employeviewmodel.updateEmployee(requireContext(),employee!!)
-        }else{
-            employeviewmodel.addEmploye(requireContext(),name,role)
+            if (empId != null) {
+                // ❗ FIX: Pass a new EmployeeModel with updated values
+                val updatedEmp = EmployeeModel(empId!!, name, role)
+                employeviewmodel.updateEmployee(requireContext(), updatedEmp)
+            } else {
+                employeviewmodel.addEmploye(requireContext(), name, role)
+            }
+
+            // ✅ Navigate back to HomeFragment
+            findNavController().navigate(R.id.action_addNewEmpFragment_to_homeFragment)
         }
-            
-           findNavController().navigate(R.id.action_addNewEmpFragment_to_homeFragment)
-
-        }
-
-
-
-
     }
 }

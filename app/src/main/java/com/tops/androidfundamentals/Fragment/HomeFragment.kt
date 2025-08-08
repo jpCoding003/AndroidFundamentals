@@ -22,6 +22,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val employeviewmodel: EmployeVideModel by viewModels()
+    private lateinit var adapter : MyAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,17 +35,26 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        employeviewmodel.loadEmployeData(requireContext())
-        binding.rvEmpData.layoutManager = LinearLayoutManager(requireContext())
-        employeviewmodel.employelist.observe(viewLifecycleOwner, Observer{
-                list-> binding.rvEmpData.adapter = MyAdapter(list,{ empId-> employeviewmodel.deleteEmployee(requireContext(),empId) },
-            {
-                emp-> val bundle = Bundle().apply {
-                    putParcelable("employe",emp)
-                }
-                findNavController().navigate(R.id.action_homeFragment_to_addNewEmpFragment,bundle)
-            })
+
+        adapter = MyAdapter(mutableListOf(), { empId ->
+            employeviewmodel.deleteEmployee(requireContext(), empId)
+        }, { emp ->
+            val bundle = Bundle().apply {
+                putParcelable("employe", emp)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_addNewEmpFragment, bundle)
         })
+
+        binding.rvEmpData.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvEmpData.adapter = adapter
+
+        // ✅ Observe data and update list
+        employeviewmodel.employelist.observe(viewLifecycleOwner) { list ->
+            adapter.updateList(list)
+        }
+
+        // ✅ Load data
+        employeviewmodel.loadEmployeData(requireContext())
 
         binding.btnaddemp.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addNewEmpFragment)
